@@ -2,59 +2,72 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" contente="Aplicação para anotações">
-    <meta name="keywords" contente="anotações, anotações">
-    <meta name="author" contente="Felipe Martins">
-    
-    <title>Learning Log</title>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" contente="Aplicação para anotações">
+        <meta name="keywords" contente="anotações, anotações">
+        <meta name="author" contente="Felipe Martins">
+        
+        <title>Learning Log</title>
 
-    {% bootstrap_css %}
-    {% bootstrap_javascript %}
+        {% bootstrap_css %}
+        {% bootstrap_javascript %}
 
-</head>
-<body>
-    <nav class="navbar navbar-default navbar-static-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" 
-                    class="navbar-toggle collapsed" 
-                    data-toggle="collapse" 
-                    data-target="#navbar" 
-                    aria-expanded="false"
-                >
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="{% url 'index' %}">Learning Log</a>
-            </div>
+        <style>
+            .ul-none ul{
+                display: none;
+            }
+            .helptext, .help-block{
+                display: none;
+            }
+        </style>
 
-            <div class="collapse navbar-collapse" id="navbar">
-                <ul class="nav navbar-nav" >
-                    <li><a href="{% url 'topics' %}">Tópicos</a></li> 
-                </ul>
-                
-                <ul class="nav navbar-nav navbar-right">
-                    {% if user.is_authenticated %}
-                        <li><a>Olá, {{ user.username }}</a></li>
-                        <li><a href="{% url 'logout' %}">Sair</a></li>
+    </head>
+    <body>
+        <nav class="navbar navbar-default navbar-static-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" 
+                        class="navbar-toggle collapsed" 
+                        data-toggle="collapse" 
+                        data-target="#navbar" 
+                        aria-expanded="false"
+                    >
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="{% url 'index' %}">Learning Log</a>
+                </div>
+
+                <div class="collapse navbar-collapse" id="navbar">
+                    <ul class="nav navbar-nav" >
+                        <li><a href="{% url 'topics' %}">Tópicos</a></li> 
+                    </ul>
                     
-                    {% else %}
-                        <li><a href="{% url 'register' %}">Registrar</a></li>
-                        <li><a href="{% url 'login' %}">Entrar</a></li>
-                    {% endif %}
-                </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        {% if user.is_authenticated %}
+                            <li><a>Olá, {{ user.username }}</a></li>
+                            <li><a href="{% url 'logout' %}">Sair</a></li>
+                        
+                        {% else %}
+                            <li><a href="{% url 'register' %}">Registrar</a></li>
+                            <li><a href="{% url 'login' %}">Entrar</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="container">
+            <div class="page-header">
+                {% block header %}{% endblock header %}
+            </div>
+            <div>
+                {% block content %}{% endblock content %}
             </div>
         </div>
-    </nav>
         
-    
-    
-    
-</body>
+    </body>
 </html>
-{% block content %}{% endblock content %}
